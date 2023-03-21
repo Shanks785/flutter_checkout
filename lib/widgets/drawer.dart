@@ -9,28 +9,39 @@ class MyDrawer extends StatelessWidget {
     final imageUrl = "https://avatars.githubusercontent.com/u/76845428?v=4";
 
     return Drawer(
-      child: ListView(
-        children: [  
-          DrawerHeader(
-            child: UserAccountsDrawerHeader(
-              margin: EdgeInsets.zero,
-              accountName: Text('Shanks'),
-              accountEmail: Text('shanks785@gmail.com'),
-              currentAccountPicture: Image.network(imageUrl),
+      child: Container(
+        color: Colors.deepPurple,
+        child: ListView(
+          children: [  
+            DrawerHeader(
+              padding: EdgeInsets.zero,
+              child: UserAccountsDrawerHeader(
+                margin: EdgeInsets.zero,
+                accountName: Text('Shanks'),
+                accountEmail: Text('shanks785@gmail.com'),
+                // currentAccountPicture: Image.network(imageUrl),
+                currentAccountPicture: CircleAvatar(
+                  backgroundImage: NetworkImage(imageUrl),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
             ),
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
+            ListTile(
+              leading: Icon(Icons.home, color: Colors.white),
+              title: Text('Home', textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-          ),
-        ],
+            ListTile(
+              leading: Icon(Icons.person, color: Colors.white),
+              title: Text('Profile', textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings, color: Colors.white),
+              title: Text('Settings', textScaleFactor: 1.2, style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
       ),
     );
   }

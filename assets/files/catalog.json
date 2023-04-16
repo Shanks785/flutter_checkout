@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "iPhone 12",
-            "desc": "Apple iPhone 12 smartphone. Announced Oct 2020. Features 6.1″ display, Apple A14 Bionic chipset, 2815 mAh battery, 256 GB storage, 4 GB RAM, Ceramic Shield.",
+            "desc": "Apple iPhone 12 smartphone. Announced Oct 2020. Features 6.1″ display.",
             "price": 999,
             "color": "#33505a",
             "image": "https://cdn.dxomark.com/wp-content/uploads/medias/post-61183/iphone-12-pro-blue-hero.jpg"

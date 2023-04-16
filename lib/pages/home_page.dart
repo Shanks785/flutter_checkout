@@ -27,10 +27,15 @@ class _HomePageState extends State<HomePage> {
 
   // TODO: how to read local json file
   loadData() async {
+    await Future.delayed(Duration(seconds: 2)); //temp code
     final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
     print("Data loaded");
+    setState(() {});
   }
 
   @override
@@ -39,13 +44,18 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Catalog App'),
       ),
-      body: ListView.builder(
-        itemCount: CatalogModel.items.length,
-        itemBuilder: (context, index) {
-            return ItemWidget(
-              item: CatalogModel.items[index],
-            );
-        },
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: (CatalogModel.items.isNotEmpty) ? ListView.builder(
+          itemCount: CatalogModel.items.length,
+          itemBuilder: (context, index) {
+              return ItemWidget(
+                item: CatalogModel.items[index],
+              );
+          },
+        ): Center(
+          child: CircularProgressIndicator(),
+        )
       ),
       drawer: MyDrawer()
     );

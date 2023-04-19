@@ -8,7 +8,7 @@ class MyTheme {
         // canvasColor: Colors.white,
         fontFamily: GoogleFonts.lato().fontFamily,
         appBarTheme: AppBarTheme(
-          color: Colors.deepPurple,
+          color: Colors.teal,
           elevation: 0.0,
           iconTheme: IconThemeData(color: Colors.black),
           // toolbarTextStyle: TextStyle(color: Colors.black),

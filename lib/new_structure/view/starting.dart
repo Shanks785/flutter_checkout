@@ -1,4 +1,5 @@
 import 'package:basic/new_structure/bloc/starting_bloc.dart';
+import 'package:basic/new_structure/components/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -43,6 +44,7 @@ class _StartingState extends State<Starting> {
               ),
             );
           case LoadedSuccessState:
+          final successState = state as LoadedSuccessState;
             return Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -69,9 +71,11 @@ class _StartingState extends State<Starting> {
                   ),
                 ],
               ),
-              body: Container(
-                child: Text("Starting"),
-              ),
+              body: ListView.builder(
+                itemCount: successState.products.length,
+                itemBuilder: (context, index) {
+                return ProductTile(productDataModel: successState.products[index]);
+              }),
             );
           case ErrorState:
             return Scaffold(

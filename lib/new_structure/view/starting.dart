@@ -1,9 +1,6 @@
 import 'package:basic/new_structure/bloc/starting_bloc.dart';
 import 'package:basic/new_structure/components/product_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Starting extends StatefulWidget {
@@ -33,6 +30,18 @@ class _StartingState extends State<Starting> {
           Navigator.pushNamed(context, "/wishlist");
         } else if (state is NavigateToCartActionState) {
           Navigator.pushNamed(context, "/cart");
+        } else if (state is WishlistedActionState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Added to Wishlist"),
+            ),
+          );
+        } else if (state is AddToCartActionState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Added to Cart"),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -74,7 +83,7 @@ class _StartingState extends State<Starting> {
               body: ListView.builder(
                 itemCount: successState.products.length,
                 itemBuilder: (context, index) {
-                return ProductTile(productDataModel: successState.products[index]);
+                return ProductTile(productDataModel: successState.products[index], startingBloc: startingBloc,);
               }),
             );
           case ErrorState:

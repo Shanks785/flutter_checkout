@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:basic/data/cart_items.dart';
+import 'package:basic/data/wishlist_items.dart';
 import 'package:basic/new_structure/models/product_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -36,12 +38,16 @@ class StartingBloc extends Bloc<StartingEvent, StartingState> {
   FutureOr<void> wishlistBtnEvent(
       WishlistBtnEvent event, Emitter<StartingState> emit) async {
     print('Wishlist Button Clicked');
+    wishlistItems.add(event.addProduct);
+    emit(WishlistedActionState());
     // emit(NavigateToWishlistActionState());
   }
 
   FutureOr<void> productCartBtnEvent(
       ProductCartBtnEvent event, Emitter<StartingState> emit) {
     print('Cart Button Clicked');
+    cartItems.add(event.addProduct);
+    emit(AddToCartActionState());
     // emit(NavigateToCartActionState());
   }
 

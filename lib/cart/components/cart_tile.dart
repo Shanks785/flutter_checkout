@@ -1,12 +1,12 @@
-import 'package:basic/new_structure/models/product_data.dart';
 import 'package:flutter/material.dart';
-import '../bloc/starting_bloc.dart';
 
-class ProductTile extends StatelessWidget {
+import '../../new_structure/models/product_data.dart';
+import '../bloc/cart_bloc.dart';
+
+class CartTile extends StatelessWidget {
   final ProductDataModel productDataModel;
-  final StartingBloc startingBloc;
-  const ProductTile({Key? key, required this.productDataModel, required this.startingBloc})
-      : super(key: key);
+  final CartBloc cartBloc;
+  const CartTile({Key? key, required this.productDataModel, required this.cartBloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +61,8 @@ class ProductTile extends StatelessWidget {
                     Text(
                       "\$${productDataModel.price}",
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
                       ),
                     ),
                   ],
@@ -72,21 +71,13 @@ class ProductTile extends StatelessWidget {
               const Spacer(),
               IconButton(
                 onPressed: () {
-                  startingBloc.add(WishlistBtnEvent(addProduct: productDataModel));
+                  cartBloc.add(RemoveItemEvent(removeProduct: productDataModel));
                 },
                 icon: const Icon(
-                  Icons.favorite_border,
+                  Icons.delete,
                   color: Colors.red,
                 ),
               ),
-              IconButton(
-                  onPressed: () {
-                    startingBloc.add(ProductCartBtnEvent(addProduct: productDataModel));
-                  },
-                  icon: const Icon(
-                    Icons.add_shopping_cart,
-                    color: Colors.red,
-                  ))
             ],
           ),
         ],

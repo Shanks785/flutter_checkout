@@ -25,4 +25,7 @@ class NavigateToWishlistActionState extends StartingActionState {}
 class NavigateToCartActionState extends StartingActionState {}
 
 
-
+// When item is added to wishlist, we want to show a snackbar
+class WishlistedActionState extends StartingActionState {}
+// When item is added to cart, we want to show a snackbar
+class AddToCartActionState extends StartingActionState {}

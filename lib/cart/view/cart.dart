@@ -1,7 +1,8 @@
+import 'package:basic/cart/bloc/cart_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../components/cart_tile.dart';
 
 class Cart extends StatefulWidget {
   const Cart({Key? key}) : super(key: key);
@@ -11,7 +12,13 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  final items = List<String>.generate(10, (index) => 'Item $index');
+  final CartBloc cartBloc = CartBloc();
+
+  @override
+  initState() {
+    cartBloc.add(CartInitialEvent());
+    super.initState();
+  }
 
   // final List<String> items;
 
@@ -19,41 +26,37 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Cart',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 16),
-        Expanded(
-          child: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              return Material(
-                child: ListTile(
-                  title: Text(item),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      // TODO: Implement delete item functionality
-                    },
-                  ),
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Cart Items"),
+      ),
+      body: BlocConsumer<CartBloc, CartState>(
+        bloc: cartBloc,
+        listenWhen: (previous, current) => current is CartActionState,
+        buildWhen: (previous, current) => current is! CartActionState,
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case SuccessState:
+              final successState = state as SuccessState;
+              return ListView.builder(
+                itemCount: successState.products.length,
+                itemBuilder: (context, index) {
+                  return CartTile(
+                    productDataModel: successState.products[index],
+                    cartBloc: cartBloc,
+                  );
+                },
               );
-            },
-          ),
-        ),
-        SizedBox(height: 16),
-        TextButton(
-          child: Text('Checkout'),
-          onPressed: () {
-            // TODO: Implement checkout functionality
-          },
-        ),
-      ],
+            default:
+              return Center(
+                child: Text("Cart is Empty"),
+              );
+          }
+        },
+      ),
     );
   }
 }

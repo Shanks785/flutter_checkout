@@ -4,6 +4,7 @@ import 'package:basic/new_structure/view/starting.dart';
 import 'package:basic/wishlist/view/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'login/view/login_page.dart';
 import 'utils/themes.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.startingRoute: (context) => Starting(),
         MyRoutes.cartRoute: (context) => Cart(),
         MyRoutes.wishlistRoute: (context) => Wishlist(),
-        // MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
       },
     );
   }

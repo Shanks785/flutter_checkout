@@ -4,6 +4,8 @@ import 'package:basic/new_structure/view/starting.dart';
 import 'package:basic/wishlist/view/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'landing/view/landing.dart';
+import 'landing/view/test_landing.dart';
 import 'login/view/login_page.dart';
 import 'utils/themes.dart';
 
@@ -31,10 +33,11 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       // home: HomePage(),
-      initialRoute: MyRoutes.startingRoute,
+      initialRoute: MyRoutes.landingRoute,
       routes: {
         // "/": (context) => LoginPage(),
         MyRoutes.startingRoute: (context) => Starting(),
+        MyRoutes.landingRoute: (context) => Landing(),
         MyRoutes.cartRoute: (context) => Cart(),
         MyRoutes.wishlistRoute: (context) => Wishlist(),
         MyRoutes.loginRoute: (context) => LoginPage(),

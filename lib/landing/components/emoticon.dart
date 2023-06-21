@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Emoticon extends StatelessWidget {
-  final emojiText;
-  final emojiIcon;
+  final String emojiText;
+  final String emojiIcon;
   const Emoticon({Key? key, required this.emojiText, required this.emojiIcon}) : super(key: key);
 
   @override

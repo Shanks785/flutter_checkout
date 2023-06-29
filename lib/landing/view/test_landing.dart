@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../new_structure/models/emoji.dart';
+import '../../new_structure/models/slides.dart';
 import '../components/emoticon.dart';
+import '../components/slides.dart';
 
 class Landing extends StatefulWidget {
   const Landing({Key? key}) : super(key: key);
@@ -16,6 +18,16 @@ class _LandingState extends State<Landing> {
     EmojiDataModel(id: 2, emojiIcon: '😁', emojiText: 'Happy'),
     EmojiDataModel(id: 3, emojiIcon: '😡', emojiText: 'Angry'),
     EmojiDataModel(id: 4, emojiIcon: '🤑', emojiText: 'Rich'),
+  ];
+
+  List<SlidesDataModel> slides = [
+    SlidesDataModel(id: 1, slideText: 'Speaking Skills', slideSubText: '16 Excercises', slideIcon: Icons.favorite_sharp),
+    SlidesDataModel(id: 2, slideText: 'Reading Speed', slideSubText: '8 Excercises', slideIcon: Icons.person_2_sharp),
+    SlidesDataModel(id: 3, slideText: 'Writing Speed', slideSubText: '10 Excercises', slideIcon: Icons.edit_square),
+    SlidesDataModel(id: 4, slideText: 'Writing Speed', slideSubText: '10 Excercises', slideIcon: Icons.edit_square),
+    SlidesDataModel(id: 5, slideText: 'Writing Speed', slideSubText: '10 Excercises', slideIcon: Icons.edit_square),
+    SlidesDataModel(id: 6, slideText: 'Writing Speed', slideSubText: '10 Excercises', slideIcon: Icons.edit_square),
+    SlidesDataModel(id: 7, slideText: 'Writing Speed', slideSubText: '10 Excercises', slideIcon: Icons.edit_square),
   ];
 
   @override
@@ -94,9 +106,12 @@ class _LandingState extends State<Landing> {
                                 itemCount:
                                     emoji.length, // Number of items in the loop
                                 itemBuilder: (context, index) {
+                                  final screenWidth = MediaQuery.of(context).size.width;
+                                  final margin = screenWidth * 0.12; // 10% of the screen width
                                   // Build the individual items inside the loop
                                   return Container(
-                                    width: 77,
+                                    margin: EdgeInsets.only(right: margin),
+                                    // width: 70,
                                     // height: 100,
                                     child: Emoticon(
                                       emojiIcon: emoji[index].emojiIcon,
@@ -119,13 +134,14 @@ class _LandingState extends State<Landing> {
                   ),
                   child: Container(
                     color: Colors.grey[100],
-                    child: Padding(
-                      padding: EdgeInsets.zero,
-                      child: Column(children: [
-                        Icon(Icons.horizontal_rule_rounded,
-                            size: 50, color: Colors.grey.shade500),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //old padding S
+                    child: Column(children: [
+                      Icon(Icons.horizontal_rule_rounded,
+                          size: 50, color: Colors.grey.shade500),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('Excercises',
                                   style: TextStyle(
@@ -134,9 +150,39 @@ class _LandingState extends State<Landing> {
                                       color: Colors.black)),
                               Icon(Icons.more_horiz_outlined,
                                   size: 50, color: Colors.black)
-                            ])
-                      ]),
-                    ),
+                            ]),
+                      ),
+                      const SizedBox(height: 5),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.zero,
+                          color: Colors.grey[100],
+                          // height: 300,
+                          width: MediaQuery.of(context).size.width * 100,
+                          child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  itemCount:
+                                      slides.length, // Number of items in the loop
+                                  itemBuilder: (context, index) {
+                                    final screenWidth = MediaQuery.of(context).size.width;
+                                    final margin = screenWidth * 0.1; // 10% of the screen width
+                                    // Build the individual items inside the loop
+                                    return Container(
+                                      margin: EdgeInsets.symmetric(vertical: 3, horizontal: margin),
+                                      // width: 50,
+                                      // height: 100,
+                                      child: Slides(
+                                        slideText: slides[index].slideText,
+                                        slideSubText: slides[index].slideSubText,
+                                        slideIcon: slides[index].slideIcon,
+                                      ),
+                                    );
+                                  },
+                                ),
+                        ),
+                      )
+                    ]),
+                    //old padding E
                   ),
                 ),
               ),
